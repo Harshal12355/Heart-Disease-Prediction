@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 16px;
+            color: #888;
+        }
+
+        .alert {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Heart Disease Prediction</h1>
+
+        <!-- Input Form -->
+        <form id="predictionForm">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <select id="sex" required>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="chol">Cholesterol Level:</label>
+                <input type="number" id="chol" required>
+            </div>
+
+            <div class="form-group">
+                <label for="trestbps">Resting Blood Pressure:</label>
+                <input type="number" id="trestbps" required>
+            </div>
+
+            <button type="submit" class="btn">Predict</button>
+        </form>
+
+        <div class="loading" id="loadingMessage" style="display:none;">Loading...</div>
+
+        <div class="result" id="resultMessage" style="display:none;"></div>
+        <div class="alert" id="errorMessage" style="display:none;"></div>
+    </div>
+
+    <script>
+        // JavaScript for Handling Form and Model Prediction
+
+        // Form submission event
+        document.getElementById('predictionForm').addEventListener('submit', function (event) {
+            event.preventDefault();  // Prevent default form submission behavior
+
+            // Get form data
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
+            const chol = document.getElementById('chol').value;
+            const trestbps = document.getElementById('trestbps').value;
+
+            // Check for empty fields
+            if (!age || !sex || !chol || !trestbps) {
+                showError('Please fill out all fields.');
+                return;
+            }
+
+            // Hide previous result and show loading message
+            hideResult();
+            showLoading();
+
+            // Simulate a model prediction (replace with actual model prediction logic)
+            setTimeout(function () {
+                const prediction = Math.random() < 0.5 ? 'No Heart Disease' : 'Heart Disease Detected';
+
+                // Show prediction result
+                showResult(prediction);
+            }, 1500);  // Simulating a delay in prediction
+
+        });
+
+        // Show loading message
+        function showLoading() {
+            document.getElementById('loadingMessage').style.display = 'block';
+            document.getElementById('resultMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Show result message
+        function showResult(message) {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('resultMessage').style.display = 'block';
+            document.getElementById('resultMessage').textContent = `Prediction: ${message}`;
+        }
+
+        // Show error message
+        function showError(message) {
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        // Hide result and error messages
+        function hideResult() {
+            document.getElementById('resultMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
