@@ -42,7 +42,7 @@ pip install -r requirements.txt
 Start the Flask application by running the following command:
 
 ```
-python app.py
+flask --app api_model run
 ```
 
 ## Web Interface
